@@ -21,7 +21,7 @@ ChatBot::ChatBot()
 ChatBot::ChatBot(std::string filename)
 {
     std::cout << "ChatBot Constructor" << std::endl;
-    
+
     // invalidate data handles
     _chatLogic = nullptr;
     _rootNode = nullptr;
@@ -44,6 +44,49 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(ChatBot& source){
+    std::cout << "Start copy constructor\n";
+
+    // Copy _rootNode
+    std::cout << "1. Address of this = " << this << ", address of source = " << &source << std::endl;
+    std::cout << "2. Address of this._rootNode = " << this->_rootNode << ", address of source._rootNode = " << source._rootNode << std::endl;
+    std::cout << "3. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+    if (source._rootNode == nullptr){
+        this->_rootNode = nullptr;
+    }
+    else {
+        int id = source._rootNode->GetID();
+        this->_rootNode = new GraphNode(id);
+        std::cout << "4. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+        *this->_rootNode = *source._rootNode;
+    }
+    // *this->_rootNode = *source._rootNode;
+    std::cout << "5. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+
+    // Copy _chatLogic
+    if (source._chatLogic == nullptr){
+        this->_chatLogic = nullptr;
+    }
+    else{
+        this->_chatLogic = new ChatLogic();
+        *this->_chatLogic = *source._chatLogic;
+    }
+    std::cout << "6. this->_chatLogic = " << this->_chatLogic << ", source._chatLogic = " << source._chatLogic << std::endl;
+
+    // Copy _image;
+    if (source._image == nullptr){
+        this->_image = nullptr;
+    }
+    else {
+        this->_image = new wxBitmap();
+        *this->_image = *source._image;
+    }
+    std::cout << "7. this->_image = " << this->_image << ", source._image = " << source._image << std::endl;
+
+    std::cout << "End copy constructor\n";
+
+};
+
 
 ////
 //// EOF STUDENT CODE
