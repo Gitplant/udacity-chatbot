@@ -20,7 +20,7 @@ ChatBot::ChatBot()
 // constructor WITH memory allocation
 ChatBot::ChatBot(std::string filename)
 {
-    std::cout << "ChatBot Constructor" << std::endl;
+    std::cout << "\nChatBot Constructor" << std::endl;
 
     // invalidate data handles
     _chatLogic = nullptr;
@@ -32,7 +32,7 @@ ChatBot::ChatBot(std::string filename)
 
 ChatBot::~ChatBot()
 {
-    std::cout << "ChatBot Destructor" << std::endl;
+    std::cout << "\nChatBot Destructor" << std::endl;
 
     // deallocate heap memory
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
@@ -44,6 +44,8 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+
+// Copy constructor
 ChatBot::ChatBot(ChatBot& source){
     std::cout << "\nStart copy constructor\n";
 
@@ -126,8 +128,31 @@ ChatBot& ChatBot::operator=(const ChatBot &source){
 
     std::cout << "End copy assignment operator\n";
     return *this;
+
 };
 
+// Move constructor
+ChatBot::ChatBot(ChatBot &&source)
+{
+    std::cout << "\nStart move constructor\n";
+    std::cout << "1. Address of this = " << this << ", address of source = " << &source << std::endl;
+    std::cout << "3. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+    this->_rootNode = source._rootNode;
+    source._rootNode = nullptr;
+    std::cout << "4. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+
+    std::cout << "5. this->_chatLogic = " << this->_chatLogic << ", source._chatLogic = " << source._chatLogic << std::endl;
+    this->_chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+    std::cout << "6. this->_chatLogic = " << this->_chatLogic << ", source._chatLogic = " << source._chatLogic << std::endl;
+
+    std::cout << "7. this->_image = " << this->_image << ", source._image = " << source._image << std::endl;
+    this->_image = source._image;
+    source._image = NULL;
+    std::cout << "8. this->_image = " << this->_image << ", source._image = " << source._image << std::endl;
+
+    std::cout << "End move constructor\n";
+};
 
 ////
 //// EOF STUDENT CODE
