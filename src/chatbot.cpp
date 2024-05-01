@@ -154,6 +154,30 @@ ChatBot::ChatBot(ChatBot &&source)
     std::cout << "End move constructor\n";
 };
 
+// Move assignment operator
+ChatBot& ChatBot::operator=(ChatBot &&source){
+    std::cout << "\nStart move assignment operator\n";
+    std::cout << "1. Address of this = " << this << ", address of source = " << &source << std::endl;
+    std::cout << "3. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+    this->_rootNode = source._rootNode;
+    source._rootNode = nullptr;
+    std::cout << "4. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+
+    std::cout << "5. this->_chatLogic = " << this->_chatLogic << ", source._chatLogic = " << source._chatLogic << std::endl;
+    this->_chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+    std::cout << "6. this->_chatLogic = " << this->_chatLogic << ", source._chatLogic = " << source._chatLogic << std::endl;
+
+    std::cout << "7. this->_image = " << this->_image << ", source._image = " << source._image << std::endl;
+    this->_image = source._image;
+    source._image = NULL;
+    std::cout << "8. this->_image = " << this->_image << ", source._image = " << source._image << std::endl;
+
+    std::cout << "End move assignment operator\n";
+
+    return *this;
+};
+
 ////
 //// EOF STUDENT CODE
 
