@@ -137,7 +137,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         {
                             // _nodes.emplace_back(new GraphNode(id));
                             // _nodes.emplace_back(std::make_shared<GraphNode>(GraphNode(id)));
-                            // _nodes.emplace_back(std::make_shared<GraphNode>(GraphNode(id)));
                             _nodes.emplace_back(std::make_unique<GraphNode>(GraphNode(id)));
                             newNode = _nodes.end() - 1; // get iterator to last element
 
