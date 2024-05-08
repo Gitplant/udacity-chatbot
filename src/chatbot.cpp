@@ -99,9 +99,10 @@ ChatBot& ChatBot::operator=(const ChatBot &source){
     }
     else {
         int id = source._rootNode->GetID();
-        this->_rootNode = new GraphNode(id);
-        std::cout << "4. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
-        *this->_rootNode = *source._rootNode;
+        // this->_rootNode = new GraphNode(id);
+        // std::cout << "4. this->_rootNode = " <<? this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
+        // *this->_rootNode = *source._rootNode;
+        _rootNode = source._rootNode;
     }
     // *this->_rootNode = *source._rootNode;
     std::cout << "5. this->_rootNode = " << this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
@@ -111,8 +112,9 @@ ChatBot& ChatBot::operator=(const ChatBot &source){
         this->_chatLogic = nullptr;
     }
     else{
-        this->_chatLogic = new ChatLogic();
-        *this->_chatLogic = *source._chatLogic;
+        // this->_chatLogic = new ChatLogic();
+        // *this->_chatLogic = *source._chatLogic;
+        _chatLogic = source._chatLogic;
     }
     std::cout << "6. this->_chatLogic = " << this->_chatLogic << ", source._chatLogic = " << source._chatLogic << std::endl;
 
