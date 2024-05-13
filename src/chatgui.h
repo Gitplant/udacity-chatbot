@@ -30,7 +30,8 @@ public:
 
     // getter / setter
     // ChatLogic *GetChatLogicHandle() { return _chatLogic; }
-    ChatLogic* GetChatLogicHandle() { return _chatLogic.get(); }
+    // ChatLogic* GetChatLogicHandle() { return _chatLogic_get(); }
+    ChatLogic* GetChatLogicHandle();
 
     // events
     void paintEvent(wxPaintEvent &evt);
