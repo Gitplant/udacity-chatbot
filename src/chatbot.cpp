@@ -38,115 +38,50 @@ ChatBot::~ChatBot()
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
     {
         delete _image;
-        // _image = NULL;
+        _image = NULL;
     }
 }
 
 //// STUDENT CODE
 ////
-
 // Copy constructor
 ChatBot::ChatBot(ChatBot& source){
     std::cout << "\nStart copy constructor\n";
-
     // Copy _rootNode
-    if (source._rootNode == nullptr){
-        this->_rootNode = nullptr;
-    }
-    else {
-        int id = source._rootNode->GetID();
-        this->_rootNode = new GraphNode(id);
-        *this->_rootNode = *source._rootNode;
-    }
-    // *this->_rootNode = *source._rootNode;
+    this->_rootNode = source._rootNode;
 
     // Copy _currentNode
-    if (source._currentNode == nullptr){
-        this->_currentNode = nullptr;
-    }
-    else {
-        int id = source._currentNode->GetID();
-        this->_currentNode = new GraphNode(id);
-        *this->_currentNode = *source._currentNode;
-    }
-
+    this->_currentNode = source._currentNode;
 
     // Copy _chatLogic
-    if (source._chatLogic == nullptr){
-        this->_chatLogic = nullptr;
-    }
-    else{
-        this->_chatLogic = new ChatLogic();
-        *this->_chatLogic = *source._chatLogic;
-    }
+    this->_chatLogic = source._chatLogic;
+    this->_chatLogic->SetChatbotHandle(this);
 
     // Copy _image;
-    if (source._image == nullptr){
-        this->_image = nullptr;
-    }
-    else {
-        this->_image = new wxBitmap();
-        *this->_image = *source._image;
-        // this->_image = new wxBitmap(*source._image);
-    }
-
-    std::cout << "End copy constructor\n";
-
+    this->_image = new wxBitmap(*source._image);
 };
 
 // Copy assignment operator
 ChatBot& ChatBot::operator=(const ChatBot &source){
     std::cout << "\nStart copy assignment operator\n";
-
     if (this == &source){
         return *this;
     }
 
     // Copy _rootNode
-    if (source._rootNode == nullptr){
-        this->_rootNode = nullptr;
-    }
-    else {
-        int id = source._rootNode->GetID();
-        // this->_rootNode = new GraphNode(id);
-        // std::cout << "4. this->_rootNode = " <<? this->_rootNode << ", source._rootNode = " << source._rootNode << std::endl;
-        // *this->_rootNode = *source._rootNode;
-        _rootNode = source._rootNode;
-    }
-    // *this->_rootNode = *source._rootNode;
+    this->_rootNode = source._rootNode;
 
     // Copy _currentNode
-    if (source._currentNode == nullptr){
-        this->_currentNode = nullptr;
-    }
-    else {
-        int id = source._currentNode->GetID();
-        _currentNode = source._currentNode;
-    }
+    this->_currentNode = source._currentNode;
 
     // Copy _chatLogic
-    if (source._chatLogic == nullptr){
-        this->_chatLogic = nullptr;
-    }
-    else{
-        // this->_chatLogic = new ChatLogic();
-        // *this->_chatLogic = *source._chatLogic;
-        _chatLogic = source._chatLogic;
-        _chatLogic->SetChatbotHandle(this);
-    }
+    this->_chatLogic = source._chatLogic;
+    this->_chatLogic->SetChatbotHandle(this);
 
     // Copy _image;
-    if (source._image == nullptr){
-        this->_image = nullptr;
-    }
-    else {
-        this->_image = new wxBitmap();
-        *this->_image = *source._image;
-    }
+    this->_image = new wxBitmap(*source._image);
 
-    std::cout << "End copy assignment operator\n";
     return *this;
-
 };
 
 // Move constructor
@@ -166,12 +101,11 @@ ChatBot::ChatBot(ChatBot &&source)
     this->_image = source._image;
     source._image = NULL;
 
-    std::cout << "End move constructor\n";
 };
 
 // Move assignment operator
 ChatBot& ChatBot::operator=(ChatBot &&source){
-
+    std::cout << "\nStart move assignment operator\n";
     if (this == &source){
         return *this;
     }
@@ -189,11 +123,8 @@ ChatBot& ChatBot::operator=(ChatBot &&source){
     this->_image = source._image;
     source._image = NULL;
 
-    std::cout << "End move assignment operator\n";
-
     return *this;
 };
-
 ////
 //// EOF STUDENT CODE
 
