@@ -20,7 +20,7 @@ ChatBot::ChatBot()
 // constructor WITH memory allocation
 ChatBot::ChatBot(std::string filename)
 {
-    std::cout << "\nChatBot Constructor" << std::endl;
+    std::cout << "ChatBot constructor" << std::endl;
 
     // invalidate data handles
     _chatLogic = nullptr;
@@ -32,7 +32,7 @@ ChatBot::ChatBot(std::string filename)
 
 ChatBot::~ChatBot()
 {
-    std::cout << "\nChatBot Destructor" << std::endl;
+    std::cout << "ChatBot destructor" << std::endl;
 
     // deallocate heap memory
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
@@ -42,11 +42,9 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
-////
 // Copy constructor
 ChatBot::ChatBot(ChatBot& source){
-    std::cout << "\nStart copy constructor\n";
+    std::cout << "ChatBot copy constructor\n";
     // Copy _rootNode
     this->_rootNode = source._rootNode;
 
@@ -59,11 +57,11 @@ ChatBot::ChatBot(ChatBot& source){
 
     // Copy _image;
     this->_image = new wxBitmap(*source._image);
-};
+}
 
 // Copy assignment operator
 ChatBot& ChatBot::operator=(const ChatBot &source){
-    std::cout << "\nStart copy assignment operator\n";
+    std::cout << "Copy assignment operator\n";
     if (this == &source){
         return *this;
     }
@@ -82,12 +80,12 @@ ChatBot& ChatBot::operator=(const ChatBot &source){
     this->_image = new wxBitmap(*source._image);
 
     return *this;
-};
+}
 
 // Move constructor
 ChatBot::ChatBot(ChatBot &&source)
 {
-    std::cout << "\nStart move constructor\n";
+    std::cout << "Move constructor\n";
     this->_rootNode = source._rootNode;
     source._rootNode = nullptr;
 
@@ -101,11 +99,11 @@ ChatBot::ChatBot(ChatBot &&source)
     this->_image = source._image;
     source._image = NULL;
 
-};
+}
 
 // Move assignment operator
 ChatBot& ChatBot::operator=(ChatBot &&source){
-    std::cout << "\nStart move assignment operator\n";
+    std::cout << "Move assignment operator\n";
     if (this == &source){
         return *this;
     }
@@ -124,9 +122,7 @@ ChatBot& ChatBot::operator=(ChatBot &&source){
     source._image = NULL;
 
     return *this;
-};
-////
-//// EOF STUDENT CODE
+}
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
